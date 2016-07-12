@@ -26,7 +26,7 @@ class Acceso
       if (isset($_POST['user']) && $_POST['user'] && isset($_POST['pass']) && $_POST['pass']) {
         $this->name = $_POST['user'];
         $this->password = $this->encrypt($_POST['pass']);
-          
+
         // SQL
         $db = new Conexion();
         $sql = $db->query("SELECT * FROM users WHERE name='$this->name' AND password='$this->password'");
@@ -63,7 +63,7 @@ class Acceso
         $this->name = $_POST['user'];
         $this->mail = $_POST['mail'];
         $this->password = $this->encrypt($_POST['pass']);
-          
+
         // SQL
         $db = new Conexion();
         $sql = $db->query("SELECT id, name FROM users WHERE name='$this->name' OR mail='$this->mail'");
@@ -73,7 +73,7 @@ class Acceso
           $_SESSION['name'] = $this->name;
           $_SESSION['mail'] = $this->mail;
           echo 1;
-        } 
+        }
         else if($sql->rowCount() > 0) {
           $datos = $sql->fetch(PDO::FETCH_ASSOC);
           if (strtolower($this->name) == strtolower($datos['name'])) {
@@ -90,4 +90,4 @@ class Acceso
       echo $e->getMessage();
     }
   }
-} 
+}
