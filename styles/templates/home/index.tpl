@@ -80,7 +80,7 @@
                 </li>
               {/foreach}
               <li>
-                {if $smarty.get.page == max($pages)}
+                {if isset($smarty.get.page) && $smarty.get.page == max($pages)}
                   <a href="#" aria-label="Next">
                 {else}
                   <a href="?type=tops&page={$smarty.get.page + 1}" aria-label="Previous">

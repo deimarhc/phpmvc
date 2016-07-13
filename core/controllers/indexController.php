@@ -7,14 +7,14 @@ switch ($type) {
   case 'tops':
 
     // Paginación
-    $porpagina = 11;
+    $limite = 11;
     $db = new Conexion();
 
     // Cuantos registros hay
     $rows = $db->query("SELECT COUNT(*) as count FROM posts")->fetchColumn();
 
     // Cuantas páginas tendrá
-    $pages = ceil($rows / $porpagina);
+    $pages = ceil($rows / $limite);
     for ($i = 1; $i <= $pages; $i++) {
       $array_pages[] = $i;
     }
@@ -27,13 +27,13 @@ switch ($type) {
       ),
     )));
 
-    $offset = ($page - 1) * $porpagina;
+    $offset = ($page - 1) * $limite;
 
     $sql = $db->prepare("SELECT ps.title, ps.points, us.name as user_name
       FROM posts as ps LEFT JOIN users as us ON ps.author = us.id
       ORDER BY points DESC LIMIT :limite OFFSET :offset"
     );
-    $sql->bindParam(':limite', $porpagina, PDO::PARAM_INT);
+    $sql->bindParam(':limite', $limite, PDO::PARAM_INT);
     $sql->bindParam(':offset', $offset, PDO::PARAM_INT);
     $sql->execute();
 
