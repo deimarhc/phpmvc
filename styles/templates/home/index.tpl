@@ -39,7 +39,7 @@
               </thead>
               <tbody>
               {if !empty($posts)}
-                
+
               {foreach from=$posts item=post key=key}
                 <tr>
                   <td style="width: 65%;">{$post.title}</td>
@@ -56,25 +56,41 @@
               </tbody>
             </table>
           </div>
+          {if isset($pages) && !empty($pages)}
           <nav>
             <ul class="pagination">
               <li>
-                <a href="#" aria-label="Previous">
+                {if isset($smarty.get.page) && $smarty.get.page == min($pages)}
+                  <a href="#" aria-label="Previous">
+                {else}
+                  <a href="?type=tops&page={$smarty.get.page - 1}" aria-label="Previous">
+                {/if}
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
+              {foreach from=$pages item=page key=key name=name}
+                {if (!isset($smarty.get.page) || empty($smarty.get.page)) && $page == min($pages)}
+                  <li class="active">
+                {elseif isset($smarty.get.page) && $smarty.get.page == $page}
+                  <li class="active">
+                {else}
+                  <li>
+                {/if}
+                <a href="?type=tops&page={$page}">{$page}</a>
+                </li>
+              {/foreach}
               <li>
-                <a href="#" aria-label="Next">
+                {if $smarty.get.page == max($pages)}
+                  <a href="#" aria-label="Next">
+                {else}
+                  <a href="?type=tops&page={$smarty.get.page + 1}" aria-label="Previous">
+                {/if}
                   <span aria-hidden="true">&raquo;</span>
                 </a>
               </li>
             </ul>
           </nav>
+          {/if}
         </div>
       </div>
     </div>
