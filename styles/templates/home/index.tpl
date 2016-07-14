@@ -61,9 +61,9 @@
             <ul class="pagination">
               <li>
                 {if isset($smarty.get.page) && $smarty.get.page == min($pages)}
-                  <a href="#" aria-label="Previous">
-                {else}
                   <a href="?type=tops&page={$smarty.get.page - 1}" aria-label="Previous">
+                {else}
+                  <a href="#" aria-label="Previous">
                 {/if}
                   <span aria-hidden="true">&laquo;</span>
                 </a>
@@ -81,9 +81,9 @@
               {/foreach}
               <li>
                 {if isset($smarty.get.page) && $smarty.get.page == max($pages)}
-                  <a href="#" aria-label="Next">
-                {else}
                   <a href="?type=tops&page={$smarty.get.page + 1}" aria-label="Previous">
+                {else}
+                  <a href="#" aria-label="Next">
                 {/if}
                   <span aria-hidden="true">&raquo;</span>
                 </a>
