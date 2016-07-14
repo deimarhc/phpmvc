@@ -60,10 +60,10 @@
           <nav>
             <ul class="pagination">
               <li>
-                {if isset($smarty.get.page) && $smarty.get.page == min($pages)}
-                  <a href="?type=tops&page={$smarty.get.page - 1}" aria-label="Previous">
-                {else}
+                {if !isset($smarty.get.page) || $smarty.get.page == min($pages)}
                   <a href="#" aria-label="Previous">
+                {else}
+                  <a href="?type=tops&page={$smarty.get.page - 1}" aria-label="Previous">
                 {/if}
                   <span aria-hidden="true">&laquo;</span>
                 </a>
@@ -80,10 +80,12 @@
                 </li>
               {/foreach}
               <li>
-                {if isset($smarty.get.page) && $smarty.get.page == max($pages)}
-                  <a href="?type=tops&page={$smarty.get.page + 1}" aria-label="Previous">
-                {else}
+                {if !isset($smarty.get.page) && count($pages) > 1}
+                  <a href="?type=tops&page=2" aria-label="Previous">
+                {elseif isset($smarty.get.page) && $smarty.get.page == count($pages)}
                   <a href="#" aria-label="Next">
+                {else}
+                  <a href="?type=tops&page={$smarty.get.page + 1}" aria-label="Previous">
                 {/if}
                   <span aria-hidden="true">&raquo;</span>
                 </a>
